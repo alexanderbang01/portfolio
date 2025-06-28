@@ -329,21 +329,17 @@ $current_year = date('Y');
         <div class="max-w-6xl mx-auto">
             <h2 class="text-4xl font-light mb-16 text-center fade-in">tech_stack.json</h2>
 
-            <!-- Programming Languages -->
+            <!-- Core Programming Languages -->
             <div class="mb-16 fade-in">
-                <h3 class="text-xl font-medium mb-8 text-gray-300">// Programmeringssprog</h3>
-                <div class="grid grid-cols-3 md:grid-cols-5 gap-6">
-                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
-                        <i class="devicon-html5-plain text-4xl mb-3 block"></i>
-                        <div class="text-sm">HTML</div>
-                    </div>
-                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
-                        <i class="devicon-css3-plain text-4xl mb-3 block"></i>
-                        <div class="text-sm">CSS</div>
-                    </div>
+                <h3 class="text-xl font-medium mb-8 text-gray-300">// Core Programmeringssprog</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-javascript-plain text-4xl mb-3 block"></i>
                         <div class="text-sm">JavaScript</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-typescript-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">TypeScript</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-php-plain text-4xl mb-3 block"></i>
@@ -354,20 +350,39 @@ $current_year = date('Y');
                         <div class="text-sm">C#</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
-                        <i class="devicon-flutter-plain text-4xl mb-3 block"></i>
-                        <div class="text-sm">Flutter</div>
+                        <i class="devicon-swift-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Swift</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-dart-plain text-4xl mb-3 block"></i>
                         <div class="text-sm">Dart</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
-                        <i class="devicon-swift-plain text-4xl mb-3 block"></i>
-                        <div class="text-sm">Swift</div>
+                        <i class="devicon-kotlin-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Kotlin</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-python-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Python</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frontend & Styling -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-xl font-medium mb-8 text-gray-300">// Frontend & Styling</h3>
+                <div class="grid grid-cols-3 md:grid-cols-5 gap-6">
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-html5-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">HTML5</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-css3-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">CSS3</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-tailwindcss-plain text-4xl mb-3 block"></i>
-                        <div class="text-sm">Tailwind</div>
+                        <div class="text-sm">Tailwind CSS</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-bootstrap-plain text-4xl mb-3 block"></i>
@@ -376,10 +391,33 @@ $current_year = date('Y');
                 </div>
             </div>
 
+            <!-- Frameworks & Libraries -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-xl font-medium mb-8 text-gray-300">// Frameworks & Libraries</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-flutter-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Flutter</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-dotnetcore-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">.NET Core</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-react-original text-4xl mb-3 block"></i>
+                        <div class="text-sm">React</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-vuejs-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Vue.js</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Databases -->
             <div class="mb-16 fade-in">
                 <h3 class="text-xl font-medium mb-8 text-gray-300">// Databaser</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-mysql-plain text-4xl mb-3 block"></i>
                         <div class="text-sm">MySQL</div>
@@ -389,8 +427,27 @@ $current_year = date('Y');
                         <div class="text-sm">PostgreSQL</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-mongodb-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">MongoDB</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-mysql-plain text-4xl mb-3 block"></i>
                         <div class="text-sm">MariaDB</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud & Services -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-xl font-medium mb-8 text-gray-300">// Cloud & Services</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-firebase-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Firebase</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-azure-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Azure</div>
                     </div>
                 </div>
             </div>
@@ -398,7 +455,7 @@ $current_year = date('Y');
             <!-- Design Tools -->
             <div class="mb-16 fade-in">
                 <h3 class="text-xl font-medium mb-8 text-gray-300">// Design værktøjer</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-figma-plain text-4xl mb-3 block"></i>
                         <div class="text-sm">Figma</div>
@@ -417,7 +474,7 @@ $current_year = date('Y');
             <!-- Development Tools -->
             <div class="fade-in">
                 <h3 class="text-xl font-medium mb-8 text-gray-300">// Udviklingsværktøjer</h3>
-                <div class="grid grid-cols-3 md:grid-cols-4 gap-6">
+                <div class="grid grid-cols-3 md:grid-cols-5 gap-6">
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-git-plain text-4xl mb-3 block"></i>
                         <div class="text-sm">Git</div>
@@ -431,12 +488,20 @@ $current_year = date('Y');
                         <div class="text-sm">VS Code</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-visualstudio-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Visual Studio</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-xcode-plain text-4xl mb-3 block"></i>
                         <div class="text-sm">Xcode</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-androidstudio-plain text-4xl mb-3 block"></i>
                         <div class="text-sm">Android Studio</div>
+                    </div>
+                    <div class="tech-card bg-black border border-white/10 p-6 text-center">
+                        <i class="devicon-docker-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Docker</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
                         <i class="devicon-apache-plain text-4xl mb-3 block"></i>
@@ -447,8 +512,8 @@ $current_year = date('Y');
                         <div class="text-sm">XAMPP</div>
                     </div>
                     <div class="tech-card bg-black border border-white/10 p-6 text-center">
-                        <i class="devicon-firebase-plain text-4xl mb-3 block"></i>
-                        <div class="text-sm">Firebase</div>
+                        <i class="devicon-postman-plain text-4xl mb-3 block"></i>
+                        <div class="text-sm">Postman</div>
                     </div>
                 </div>
             </div>
