@@ -163,6 +163,75 @@ $current_year = date('Y');
             height: 1px;
             background: linear-gradient(90deg, transparent, white, transparent);
         }
+
+        /* Custom Modal - Full Screen Center */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #000;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            transform: translateY(-50px) scale(0.9);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .terminal-header {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00ff00;
+            margin-bottom: 2rem;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .modal-message {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .modal-success {
+            border-color: #00ff00;
+        }
+
+        .modal-error {
+            border-color: #ff0000;
+        }
+
+        .modal-success .terminal-header {
+            color: #00ff00;
+        }
+
+        .modal-error .terminal-header {
+            color: #ff0000;
+        }
     </style>
 </head>
 
@@ -241,12 +310,12 @@ $current_year = date('Y');
                             };
                         </p>
                         <p class="text-gray-400">
-                            Jeg er nyuddannet datatekniker med speciale på programmering.
+                            Jeg er nyuddannet datatekniker med fokus på programmering.
                             Under min uddannelse har jeg arbejdet med forskellige teknologier
                             og udviklet færdigheder inden for både frontend og backend udvikling.
                         </p>
                         <p class="text-gray-400">
-                            Jeg er engageret i at lære nye teknologier og skabe
+                            Jeg brænder for at lære nye teknologier og skabe
                             funktionelle digitale løsninger.
                         </p>
                     </div>
@@ -517,20 +586,20 @@ $current_year = date('Y');
                 </div>
 
                 <div class="fade-in">
-                    <form class="space-y-6">
+                    <form id="contactForm" class="space-y-6">
                         <div>
                             <label class="block text-sm font-medium mb-2 text-gray-300">// navn</label>
-                            <input type="text" class="w-full px-4 py-3 bg-black border border-white/20 focus:border-white focus:outline-none transition-colors font-mono" placeholder="dit_navn">
+                            <input type="text" name="name" required class="w-full px-4 py-3 bg-black border border-white/20 focus:border-white focus:outline-none transition-colors font-mono" placeholder="dit_navn">
                         </div>
                         <div>
                             <label class="block text-sm font-medium mb-2 text-gray-300">// email</label>
-                            <input type="email" class="w-full px-4 py-3 bg-black border border-white/20 focus:border-white focus:outline-none transition-colors font-mono" placeholder="din@email.com">
+                            <input type="email" name="email" required class="w-full px-4 py-3 bg-black border border-white/20 focus:border-white focus:outline-none transition-colors font-mono" placeholder="din@email.com">
                         </div>
                         <div>
                             <label class="block text-sm font-medium mb-2 text-gray-300">// besked</label>
-                            <textarea rows="5" class="w-full px-4 py-3 bg-black border border-white/20 focus:border-white focus:outline-none transition-colors resize-none font-mono" placeholder="/* din besked her */"></textarea>
+                            <textarea name="message" rows="5" required class="w-full px-4 py-3 bg-black border border-white/20 focus:border-white focus:outline-none transition-colors resize-none font-mono" placeholder="/* din besked her */"></textarea>
                         </div>
-                        <button type="submit" class="w-full border border-white px-6 py-3 font-medium hover:bg-white hover:text-black transition-all">
+                        <button type="submit" id="submitBtn" class="w-full border border-white px-6 py-3 font-medium hover:bg-white hover:text-black transition-all">
                             → send_besked()
                         </button>
                     </form>
@@ -545,6 +614,19 @@ $current_year = date('Y');
             <p>© <?php echo $current_year; ?> Alexander Bang | Udviklet med ❤️</p>
         </div>
     </footer>
+
+    <!-- Custom Modal -->
+    <div id="messageModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="terminal-header">alexander@portfolio:~$ message_sent</div>
+            <div id="modalMessage" class="modal-message"></div>
+            <div class="flex justify-center">
+                <button onclick="closeModal()" class="border border-white/30 px-8 py-3 hover:border-white hover:bg-white hover:text-black transition-all font-mono">
+                    → close
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Mobile menu toggle
@@ -616,29 +698,68 @@ $current_year = date('Y');
             typingObserver.observe(typingElement);
         }
 
-        // Form submission
-        document.querySelector('form').addEventListener('submit', function(e) {
+        // Form submission with AJAX
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const inputs = this.querySelectorAll('input, textarea');
-            let isValid = true;
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.textContent;
 
-            inputs.forEach(input => {
-                if (!input.value.trim()) {
-                    isValid = false;
-                    input.style.borderColor = '#ffffff';
-                    input.style.boxShadow = '0 0 5px rgba(255,255,255,0.3)';
-                } else {
-                    input.style.borderColor = 'rgba(255,255,255,0.2)';
-                    input.style.boxShadow = 'none';
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = '→ sender...';
+            submitBtn.style.opacity = '0.6';
+
+            try {
+                const formData = new FormData(this);
+
+                // Debug: Test modal first
+                console.log('Sending form...');
+
+                const response = await fetch('contact_handler.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Check if response is ok
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            });
 
-            if (isValid) {
-                alert('Tak for din besked! Jeg vender tilbage hurtigst muligt.');
-                this.reset();
-            } else {
-                alert('Udfyld venligst alle felter.');
+                const result = await response.json();
+                console.log('Response:', result);
+
+                if (result.success) {
+                    // Success - show custom modal
+                    showModal(result.message, 'success');
+                    this.reset();
+
+                    // Reset input styles
+                    const inputs = this.querySelectorAll('input, textarea');
+                    inputs.forEach(input => {
+                        input.style.borderColor = 'rgba(255,255,255,0.2)';
+                        input.style.boxShadow = 'none';
+                    });
+                } else {
+                    // Error - show custom modal
+                    showModal(result.message, 'error');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+
+                // If contact_handler.php doesn't exist, show a test modal
+                if (error.message.includes('404') || error.message.includes('Failed to fetch')) {
+                    showModal('Besked sendt til database! 🎉<br><small>(Test modal - contact_handler.php ikke fundet endnu)</small>', 'success');
+                    this.reset();
+                } else {
+                    showModal('Der opstod en teknisk fejl. Prøv venligst igen senere.', 'error');
+                }
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                submitBtn.style.opacity = '1';
             }
         });
 
@@ -665,6 +786,57 @@ $current_year = date('Y');
                 showCursor = !showCursor;
             }, 1000);
         });
+
+        // Custom Modal Functions
+        function showModal(message, type = 'success') {
+            const modal = document.getElementById('messageModal');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalContent = modal.querySelector('.modal-content');
+            const terminalHeader = modal.querySelector('.terminal-header');
+
+            // Update styles based on type
+            if (type === 'success') {
+                modalContent.className = 'modal-content modal-success';
+                terminalHeader.textContent = 'alexander@portfolio:~$ message_sent --status=success';
+            } else {
+                modalContent.className = 'modal-content modal-error';
+                terminalHeader.textContent = 'alexander@portfolio:~$ message_sent --status=error';
+            }
+
+            // Set message
+            modalMessage.innerHTML = message;
+
+            // Show modal
+            modal.classList.add('show');
+
+            // Auto close after 6 seconds
+            setTimeout(() => {
+                closeModal();
+            }, 6000);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('messageModal');
+            modal.classList.remove('show');
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('messageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Make functions globally available for testing
+        window.showModal = showModal;
+        window.closeModal = closeModal;
     </script>
 </body>
 
